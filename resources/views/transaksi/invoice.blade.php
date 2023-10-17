@@ -87,23 +87,23 @@
         <hr>
         <div class="flex-container" style="margin-bottom: 10px; text-align:right;">
             <div style="text-align: left;">Nama Product</div>
-            <div>Harga/Qty</div>
+            <div>Harga/quantity</div>
             <div>Total</div>
         </div>
-        @foreach ($order->productOrder as $item)
+        @foreach ($order->transaksiDetail as $item)
             <div class="flex-container" style="text-align: right;">
                 @php
-                    if(!empty($item->namaProduct->nama_product)) {
-                        $arr_name = explode(' ', $item->namaProduct->nama_product);
+                    if(!empty($item->transaksiDetail->nama_produk)) {
+                        $arr_name = explode(' ', $item->transaksiDetail->nama_produk);
                         $name = $arr_name[0];
-                    } elseif ($item->namaProduct->nama_product != '') {
-                            $name = $item->namaProduct->nama_product;
+                    } elseif ($item->transaksiDetail->nama_produk != '') {
+                            $name = $item->transaksiDetail->nama_produk;
                     } else {
                         $name = 'there';
                     }
                 @endphp
-                <div style="text-align: left;">{{ $item->qty }}x {{ $name }}</div>
-                <div>Rp {{ number_format($item->namaProduct->harga_product) }} </div>
+                <div style="text-align: left;">{{ $item->quantity }}x {{ $name }}</div>
+                <div>Rp {{ number_format($item->transaksiDetail->harga_product) }} </div>
                 <div>Rp {{ number_format($item->total) }} </div>
             </div>
         @endforeach

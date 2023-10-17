@@ -6,7 +6,9 @@ use App\Models\Produk;
 use App\Models\Transaksi;
 use App\Models\TransaksiDetail;
 use App\Models\order;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Livewire\Component;
+use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TransaksiIndex extends Component
@@ -99,7 +101,28 @@ class TransaksiIndex extends Component
             $deleteTransaksi = Transaksi::where('id', $value->id)->delete();
         }
 
-        Alert::success('Berhasil!', 'Produk Berhasil di tambahkan');
-        return redirect()->to('/invoice/' . $order->order_no);
+        $pdf = new \Dompdf\Dompdf();
+        // Generate the PDF content
+        $pdf->loadHtml(view('transaksi.invoice', compact('order', 'transaksiDetail'))->render());
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $pdf->render();
+
+        // Define the PDF file name
+        $pdfFileName = 'invoice-' . $order->no_order . '.pdf';
+
+        // Save the PDF to a public directory
+        $pdf->stream($pdfFileName);
+
+        // Optionally, you can save the PDF to a directory if needed
+        // $pdf->save(public_path('pdf/' . $pdfFileName));
+
+        return redirect('transaksi');
+        // Alert::success('Berhasil!', 'Produk Berhasil di tambahkan');
+        // return redirect('transaksi');
+        // return redirect()->to('/invoice/' . $order->order_no);
     }
 }
