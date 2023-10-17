@@ -4,15 +4,7 @@
     <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1'kategori Data</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <a href="#">Home</a>
-                </li>
-                <li class="breadcrumb-item active" </li>
-            </ol>
+            <h1>Riwayat Transaksi</h1>
         </div>
     </div>
 </div>
@@ -24,7 +16,6 @@
             <div class="card">
                 <div class="card-header">
                 <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('kategori.create') }}"> Create</a>
                 </div>
                 </div>
                 <div class="card-body">
@@ -37,10 +28,10 @@
                                 <th>Total</th>
                             </tr>
                         </thead>
-                        @foreach ($transaksiDetail as $item)
+                        @foreach ($transaksiDetail as $index => $item)
                         <tbody>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $index + $transaksiDetail->firstItem() }}</td>
                                 <td>{{ $item->produk->nama_produk }}</td>
                                 <td>{{ $item->quantity }}</td>
                                 <td>Rp. {{ number_format($item->total) }}</td>
@@ -49,6 +40,7 @@
                         @endforeach
                     </table>
                 </div>
+                {{ $transaksiDetail->links() }}
             </div>
         </div>
     </div>

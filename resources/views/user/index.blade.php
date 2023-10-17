@@ -37,10 +37,10 @@
                                 <th width="20%">Action</th>
                             </tr>
                         </thead>
-                        @foreach ($user as $item)
+                        @foreach ($user as $index => $item)
                         <tbody>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $index + $user->firstItem() }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->role }}</td>
                                 <td>
@@ -56,6 +56,7 @@
                         @endforeach
                     </table>
                 </div>
+                {{ $user->links() }}
             </div>
         </div>
     </div>

@@ -39,10 +39,10 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                @foreach ($produk as $item)
+                                @foreach ($produk as $index => $item)
                                     <tbody>
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $index + $produk->firstItem() }}</td>
                                             <td>{{ $item->nama_produk }}</td>
                                             <td>{{ $item->kategori->kategori }}</td>
                                             <td>{{ $item->stock }}</td>
@@ -61,6 +61,7 @@
                                 @endforeach
                             </table>
                         </div>
+                        {{ $produk->links() }}
                     </div>
                 </div>
             </div>

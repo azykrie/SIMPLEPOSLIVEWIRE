@@ -4,15 +4,15 @@
     <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1'kategori Data</h1>
+            <h1>kategori Data</h1>
         </div>
         <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <a href="#">Home</a>
-                </li>
-                <li class="breadcrumb-item active" </li>
-            </ol>
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">Kategori Data</li>
+                    </ol>
         </div>
     </div>
 </div>
@@ -36,10 +36,10 @@
                                 <th width="20%">Action</th>
                             </tr>
                         </thead>
-                        @foreach ($kategori as $item)
+                        @foreach ($kategori as $index => $item)
                         <tbody>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $index + $kategori->firstItem() }}</td>
                                 <td>{{ $item->kategori }}
                                 </td>
                                 <td>
@@ -55,6 +55,7 @@
                         @endforeach
                     </table>
                 </div>
+                {{ $kategori->links() }}
             </div>
         </div>
     </div>

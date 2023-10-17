@@ -12,7 +12,7 @@ class RiwayatTransaksiController extends Controller
      */
     public function index()
     {
-        $transaksiDetail = TransaksiDetail::all();
+        $transaksiDetail = TransaksiDetail::orderBy('created_at', 'desc')->paginate(5);
         return view('riwayat-transaksi.index' , compact('transaksiDetail'));
     }
 

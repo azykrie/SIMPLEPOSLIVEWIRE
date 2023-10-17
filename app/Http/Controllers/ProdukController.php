@@ -14,7 +14,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $produk = Produk::all();
+        $produk = Produk::orderBy('created_at', 'desc')->paginate(5);
         return view('produk.index' ,compact('produk'));
     }
 
